@@ -9,11 +9,5 @@ where
     last_connection like '221.%';
 
 -- Nombre, apellido y seguidores(followers) de todos a los que lo siguen más de 4600 personas
-select
-    first_name,
-    last_name,
-    followers
-from
-    users
-where
-    followers >= 4600;
+
+Select first_name, last_name, population from city where population > 1000;
