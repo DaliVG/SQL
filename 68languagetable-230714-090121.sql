@@ -21,11 +21,41 @@ ADD COLUMN languagecode varchar(3);
 
 
 -- Empezar con el select para confirmar lo que vamos a actualizar
-
+select
+    DISTINCT language
+from
+    countrylanguage
+order by
+    language asc;
+    
+insert into
+    "language" (name)
+select
+    DISTINCT "language"
+from
+    countrylanguage
+order by
+    language asc
 -- Actualizar todos los registros
-
+update
+    countrylanguage cl
+set
+    languagecode = (
+        select
+            "code"
+        from
+            language l
+        where
+            cl.language = l.name
+    )
 -- Cambiar tipo de dato en countrylanguage - languagecode por int4
-
+alter table
+    countrylanguage
+alter column
+    languagecode TYPE int4 USING languagecode :: integer
 -- Crear el forening key y constraints de no nulo el language_code
-
+alter TABLE
+    countrylanguage
+add
+    CONSTRAINT fk_language_code FOREIGN KEY (languagecode) REFERENCES language (code) not null;
 -- Revisar lo creado
